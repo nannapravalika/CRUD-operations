@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.datatables.net/v/bs4/dt-2.0.5/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Industry Dashboard</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            color: #1a1f36;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Ubuntu,sans-serif;
+          }
+          body {
+              min-height: 100%;
+              background-color: #ffffff;
+          }
+          h1 {
+              letter-spacing: -1px;
+          }
+          a {
+            color: #f0861d;
+            text-decoration: unset;
+          }
+          .login-root {
+              background: #fff;
+              display: flex;
+              width: 100%;
+              min-height: 100vh;
+              overflow: hidden;
+          }
+          .loginbackground {
+              min-height: 692px;
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              top: 0;
+              z-index: 0;
+              overflow: hidden;
+          }
+          .flex-flex {
+              display: flex;
+          }
+          .align-center {
+            align-items: center; 
+          }
+          .center-center {
+            align-items: center;
+            justify-content: center;
+          }
+          .box-root {
+              box-sizing: border-box;
+          }
+          .flex-direction--column {
+              -ms-flex-direction: column;
+              flex-direction: column;
+          }
+          .loginbackground-gridContainer {
+              display: -ms-grid;
+              display: grid;
+              -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
+              grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
+              -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
+              grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
+              justify-content: center;
+              margin: 0 -2%;
+              transform: rotate(-12deg) skew(-12deg);
+          }
+          .box-divider--light-all-2 {
+              box-shadow: inset 0 0 0 2px #e3e8ee;
+          }
+          .box-background--blue {
+              background-color: #f0861d;
+          }
+          .box-background--white {
+            background-color: #ffffff; 
+          }
+          .box-background--blue800 {
+              background-color: #f0861d;
+          }
+          .box-background--gray100 {
+              background-color: #e3e8ee;
+          }
+          .box-background--cyan200 {
+              background-color: #e9ae74;
+          }
+          .padding-top--64 {
+            padding-top: 64px;
+          }
+          .padding-top--24 {
+            padding-top: 24px;
+          }
+          .padding-top--48 {
+            padding-top: 48px;
+          }
+          .padding-bottom--24 {
+            padding-bottom: 24px;
+          }
+          .padding-horizontal--48 {
+            padding: 48px;
+          }
+          .padding-bottom--15 {
+            padding-bottom: 15px;
+          }
+          
+          
+          .flex-justifyContent--center {
+            -ms-flex-pack: center;
+            justify-content: center;
+          }
+          
+          .formbg {
+              margin: 0px auto;
+              width: 100%;
+              max-width: 448px;
+              background: white;
+              border-radius: 4px;
+              box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+          }
+          span {
+              display: block;
+              font-size: 20px;
+              line-height: 28px;
+              color: #1a1f36;
+          }
+          label {
+              margin-bottom: 10px;
+          }
+          .reset-pass a,label {
+              font-size: 14px;
+              font-weight: 600;
+              display: block;
+          }
+          .reset-pass > a {
+              text-align: right;
+              margin-bottom: 10px;
+          }
+          .grid--50-50 {
+              display: grid;
+              grid-template-columns: 50% 50%;
+              align-items: center;
+          }
+          
+          .field input {
+              font-size: 16px;
+              line-height: 28px;
+              padding: 8px 16px;
+              width: 100%;
+              min-height: 44px;
+              border: unset;
+              border-radius: 4px;
+              outline-color: rgb(240 134 29 / 0.5);
+              background-color: rgb(255, 255, 255);
+              box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+          }
+          
+          input[type="submit"] {
+              background-color: rgb(240 134 29);
+              box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, 
+                          rgb(84, 105, 212) 0px 0px 0px 1px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(0, 0, 0, 0) 0px 0px 0px 0px, 
+                          rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+              color: #fff;
+              font-weight: 600;
+              cursor: pointer;
+          }
+          .field-checkbox input {
+              width: 20px;
+              height: 15px;
+              margin-right: 5px; 
+              box-shadow: unset;
+              min-height: unset;
+          }
+          .field-checkbox label {
+              display: flex;
+              align-items: center;
+              margin: 0;
+          }
+          a.ssolink {
+              display: block;
+              text-align: center;
+              font-weight: 600;
+          }
+          .footer-link span {
+              font-size: 14px;
+              text-align: center;
+          }
+          .listing a {
+              color: #697386;
+              font-weight: 600;
+              margin: 0 10px;
+          }
+          
+          .animationRightLeft {
+            animation: animationRightLeft 2s ease-in-out infinite;
+          }
+          .animationLeftRight {
+            animation: animationLeftRight 2s ease-in-out infinite;
+          }
+          .tans3s {
+            animation: animationLeftRight 3s ease-in-out infinite;
+          }
+          .tans4s {
+            animation: animationLeftRight 4s ease-in-out infinite;
+          }
+          
+          @keyframes animationLeftRight {
+            0% {
+              transform: translateX(0px);
+            }
+            50% {
+              transform: translateX(1000px);
+            }
+            100% {
+              transform: translateX(0px);
+            }
+          } 
+          
+          @keyframes animationRightLeft {
+            0% {
+              transform: translateX(0px);
+            }
+            50% {
+              transform: translateX(-1000px);
+            }
+            100% {
+              transform: translateX(0px);
+            }
+          }
+        .text-success{
+            color: rgba(5, 65, 21, 0.967);
+        }
+        .text-danger{
+            color: rgb(239, 46, 46);
+        }
+        /* Style for the table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Style for the form */
+        .form-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="file"],
+        .form-container input[type="checkbox"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button.cancel {
+            background-color: #ccc;
+            margin-left: 10px;
+        }
+
+        /* Style for images */
+        .image-container {
+            max-width: 100px;
+            max-height: 100px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>

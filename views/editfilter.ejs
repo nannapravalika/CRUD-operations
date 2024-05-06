@@ -1,0 +1,45 @@
+<%- include('layout/header') %>
+<div class="container">
+    <!-- Display session messages -->
+    <% if (message) { %>
+    <div class="alert alert-success" role="alert">
+        <%= message %>
+    </div>
+    <% } %>
+    <div class="row justify-content-center"> 
+        <div class="col-md-6 my-4 border border-warning-subtle border-2 rounded ">
+            <h2 class="bg-warning text-center text-white mt-2">Add Industry</h2>
+            <!-- Form for adding/editing industry -->
+            <div class="col-md-12">
+                <form class="row g-3 p-4" method="post" action="/add" id="add-form" enctype="multipart/form-data">
+                    <div class="col-md-12">
+                        <label for="inputTitle4" class="form-label">Title</label>
+                        <input type="text" name="title" class="form-control" id="inputTitle4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputIcon4" class="form-label">Icon</label>
+                        <input type="file" name="icon" class="form-control" id="inputIcon4">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputImage" class="form-label">Image</label>
+                        <input type="file" name="image" class="form-control" id="inputImage">
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" name="active" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Active
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <input type="submit" value="Add" name="submit" class="btn btn-warning text-center">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('layout/footer') %>

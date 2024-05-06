@@ -1,0 +1,66 @@
+
+
+
+<script>
+     
+    const industryForm = document.getElementById('industryForm');
+    const industryDataForm = document.getElementById('industryDataForm');
+    const saveIndustryBtn = document.getElementById('saveIndustryBtn');
+    const cancelIndustryBtn = document.getElementById('cancelIndustryBtn');
+    const industryTableBody = document.querySelector('#industryTable tbody');
+
+    
+
+    // Clear the form fields
+    function clearIndustryForm() {
+        industryDataForm.reset();
+    }
+
+    // Show the form to edit an existing industry
+    function editIndustry(id, title, icon, image, active) {
+        document.getElementById('formTitle').innerText = 'Edit Industry';
+        industryForm.style.display = 'block';
+        document.getElementById('title').value = title;
+        document.getElementById('iconPreview').src = `data:image/jpeg;base64,${icon}`; // Set icon preview
+        document.getElementById('imagePreview').src = `data:image/jpeg;base64,${image}`; // Set image preview
+        document.getElementById('active').checked = active;
+        saveIndustryBtn.dataset.id = id; // Store industry ID in a custom attribute
+    }
+
+    // Hide the form when the Cancel button is clicked
+    cancelIndustryBtn.addEventListener('click', () => {
+        industryForm.style.display = 'none';
+    });
+
+    // Save edited industry data
+    saveIndustryBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = saveIndustryBtn.dataset.id;
+        const title = document.getElementById('title').value;
+        const icon = document.getElementById('icon').files[0];
+        const image = document.getElementById('image').files[0];
+        const active = document.getElementById('active').checked;
+        // Do something with the edited data (e.g., send it to the server)
+        console.log(`Editing industry ${id}: title=${title}, icon=${icon.name}, image=${image.name}, active=${active}`);
+        industryForm.style.display = 'none';
+    });
+
+    // Delete industry
+    function deleteIndustry(id) {
+        // Do something with the ID to delete the industry (e.g., send a request to the server)
+        console.log(`Deleting industry ${id}`);
+    }
+</script>
+<script src="https://cdn.datatables.net/v/bs4/dt-2.0.5/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+        $("table").DataTable({
+            order: [0, 'desc']
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" integrity="sha512-u3fPA7V8qQmhBPNT5quvaXVa1mnnLSXUep5PS1qo5NRzHwG19aHmNJnj1Q8hpA/nBWZtZD4r4AX6YOt5ynLN2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>
